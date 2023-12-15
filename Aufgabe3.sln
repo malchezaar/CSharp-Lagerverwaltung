@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.7.34221.43
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lagerverwaltung", "Aufgabe3\Lagerverwaltung.csproj", "{36ED1742-AAEA-4650-9607-9026474CC9BA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LagerverwaltungTest", "LagerverwaltungTest\LagerverwaltungTest.csproj", "{843FCFF6-C9A2-4702-8110-564E67119116}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{36ED1742-AAEA-4650-9607-9026474CC9BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{36ED1742-AAEA-4650-9607-9026474CC9BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{36ED1742-AAEA-4650-9607-9026474CC9BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{36ED1742-AAEA-4650-9607-9026474CC9BA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{843FCFF6-C9A2-4702-8110-564E67119116}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{843FCFF6-C9A2-4702-8110-564E67119116}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{843FCFF6-C9A2-4702-8110-564E67119116}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{843FCFF6-C9A2-4702-8110-564E67119116}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8F8F7DF1-105F-4515-9E44-D8EA3EB6E76C}
+	EndGlobalSection
+EndGlobal
