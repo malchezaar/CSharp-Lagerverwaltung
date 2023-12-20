@@ -6,53 +6,41 @@ namespace Lagerverwaltung
 
     public class Management
     {
-        Dictionary<int, Produkt> _produkte;
-        Dictionary<int, Lieferant> _lieferanten;
-        Dictionary<int, Kunde> _kunden;
-        Dictionary<int, Bestellung> _bestellungen;
+        Produkte _produkte;
+        Lieferanten _lieferanten;
+        Kunden _kunden;
+        Bestellungen _bestellungen;
         Dictionary<int, Lieferung> _lieferungen;
+
+        public Kunden Kunden
+        {
+            get => _kunden;
+        }
+
+        public Produkte Produkte
+        {
+            get => _produkte;
+        }
+
+        public Bestellungen Bestellungen
+        {
+            get => _bestellungen;
+        }
+
+        public Lieferanten Lieferanten
+        {
+            get => _lieferanten;
+        }
 
         public Management()
         {
-            _bestellungen = new Dictionary<int, Bestellung>();
-            _kunden = new Dictionary<int, Kunde>();
-            _produkte = new Dictionary<int, Produkt>();
+            _bestellungen = new Bestellungen();
+            _kunden = new Kunden();
+            _produkte = new Produkte();
             _lieferungen = new Dictionary<int, Lieferung>();
-            _lieferanten = new Dictionary<int, Lieferant>();
+            _lieferanten = new Lieferanten();
 
         }
-
-        public Produkt CreateProdukt(int artikelNummer, int verfallsZeit, string bezeichnung, int maximalMenge)
-        {
-
-            Produkt p = new Produkt(artikelNummer, verfallsZeit, bezeichnung, maximalMenge);
-            _produkte.Add(artikelNummer, p);
-            return p;
-        }
-
-        public Lieferant CreateLieferant(int lieferantenNummer, string bezeichnung)
-        {
-
-            Lieferant l = new Lieferant(lieferantenNummer, bezeichnung);
-            _lieferanten.Add(lieferantenNummer, l);
-            return l;
-        }
-
-        public Kunde CreateKunde(int kundenNummer, string bezeichnung)
-        {
-
-            Kunde k = new Kunde(kundenNummer, bezeichnung);
-            _kunden.Add(kundenNummer, k);
-            return k;
-        }
-
-        public Bestellung CreateBestellung(int bestellNummer, Kunde kunde, Produkt produkt, int menge, DateTime lieferdatum)
-        {
-            Bestellung b = new Bestellung(bestellNummer, kunde, produkt, menge, lieferdatum);
-            _bestellungen.Add(bestellNummer, b);
-            return b;
-        }
-
         public Lieferung? CreateLieferung(int lieferNummer, int artikelNummer, Lieferant lieferant, int menge)
         {
             int lieferzeit = lieferant.CanDeliver(artikelNummer);
@@ -84,9 +72,9 @@ namespace Lagerverwaltung
             var list = new Dictionary<int, int>();
             foreach (var p in _produkte)
             {
-                int amount = p.Value.CheckExpirationDates();
+                int amount = p.CheckExpirationDates();
                 if (amount != 0)
-                    list.Add(p.Value.ArtikelNummer, amount);
+                    list.Add(p.ArtikelNummer, amount);
 
             }
             return list;
@@ -97,22 +85,36 @@ namespace Lagerverwaltung
             
             foreach (var p in _bestellungen)
             {
-                if (p.Value.Lieferdatum == DateTime.Today)
+                if (p.Lieferdatum == DateTime.Today)
                 {
-                    p.Value.Produkt.RemoveFromStorage(p.Value.Menge);
+                    p.Produkt.RemoveFromStorage(p.Menge);
                 }
 
             }
         }
+
+        public void ProcessTodaysDeliveries()
+        {
+
+            foreach (var p in _lieferungen)
+            {
+                if (p.Value.Lieferdatum == DateTime.Today)
+                {
+                    p.Value.Produkt.AddToStorage(p.Value);
+                }
+
+            }
+        }
+
 
         public List<Bestellung> GetOrdersByDay(DateTime day)
         {
             var list = new List<Bestellung>();
             foreach (var p in _bestellungen)
             {
-                if (p.Value.Lieferdatum == day)
+                if (p.Lieferdatum == day)
                 {
-                    list.Add(p.Value);
+                    list.Add(p);
                 }
             }
             return list;
@@ -148,9 +150,9 @@ namespace Lagerverwaltung
             var list = new List<Bestellung>();
             foreach (var p in _bestellungen)
             {
-                if (p.Value.Kunde.KundenNummer == kundenNummer)
+                if (p.Kunde.KundenNummer == kundenNummer)
                 {
-                    list.Add(p.Value);
+                    list.Add(p);
                 }
             }
             return list;
